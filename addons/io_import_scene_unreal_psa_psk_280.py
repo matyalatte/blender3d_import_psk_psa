@@ -18,7 +18,7 @@
 
 bl_info = {
     "name": "Import Unreal Skeleton Mesh (.psk)/Animation Set (.psa) (280)",
-    "author": "Darknet, flufy3d, camg188, befzz",
+    "author": "Darknet, flufy3d, camg188, befzz, matyalatte",
     "version": (2, 8, 0),
     "blender": (2, 80, 0),
     "location": "File > Import > Skeleton Mesh (.psk)/Animation Set (.psa) OR View3D > Tool Shelf (key T) > Misc. tab",
@@ -60,6 +60,12 @@ Github: https://github.com/Befzz/blender3d_import_psk_psa
 Version': '2.8.0' edited by floxay
 - Vertex normals import (VTXNORMS chunk)
         (requires custom UEViewer build /at the moment/)
+"""
+
+"""
+Edited by matyalatte
+- Rename objects
+- Apply smooth shading
 """
 
 # https://github.com/gildor2/UModel/blob/master/Exporters/Psk.h
@@ -624,10 +630,10 @@ def pskimport(filepath,
     # file name w/out extension
     gen_name_part = util_gen_name_part(filepath)
     gen_names = {
-        'armature_object':  gen_name_part + '.ao',
-        'armature_data':    gen_name_part + '.ad',
-            'mesh_object':  gen_name_part + '.mo',
-            'mesh_data':    gen_name_part + '.md'
+        'armature_object':  'Armature',
+        'armature_data':    gen_name_part,
+            'mesh_object':  gen_name_part,
+            'mesh_data':    gen_name_part
     }
     
     if bImportmesh:
@@ -942,7 +948,7 @@ def pskimport(filepath,
                     print(bone.name, psk_bone.orig_loc, orig_loc, (psk_bone.orig_loc - orig_loc).length)
             '''
     utils_set_mode('OBJECT')
-         
+    
     #==================================================================================================
     # Weights
     if bImportmesh: 
@@ -1217,6 +1223,11 @@ def pskimport(filepath,
     
     # print("Done: %f sec." % (time.process_time() - ref_time))
     utils_set_mode('OBJECT')
+
+    # apply smooth shading
+    if bImportmesh:
+        for f in mesh_data.polygons:
+            f.use_smooth = True
     return True
 
 
