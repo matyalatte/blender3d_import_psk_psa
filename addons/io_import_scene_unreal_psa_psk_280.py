@@ -66,6 +66,7 @@ Version': '2.8.0' edited by floxay
 Edited by matyalatte
 - Rename objects
 - Apply smooth shading
+- Set false to Down Scale as default
 """
 
 # https://github.com/gildor2/UModel/blob/master/Exporters/Psk.h
@@ -320,6 +321,7 @@ def pskimport(filepath,
         bReorientDirectly = False,
         bScaleDown = True,
         bToSRGB = True,
+        bSmoothShade = True,
         error_callback = None):
     '''
     Import mesh and skeleton from .psk/.pskx files
@@ -1225,7 +1227,7 @@ def pskimport(filepath,
     utils_set_mode('OBJECT')
 
     # apply smooth shading
-    if bImportmesh:
+    if bImportmesh and bSmoothShade:
         for f in mesh_data.polygons:
             f.use_smooth = True
     return True
@@ -1881,11 +1883,16 @@ class ImportProps():
     bScaleDown : BoolProperty(
             name = "Scale down",
             description = " * Used by PSK and PSA.\n * Multiply coordinates by 0.01\n * From \"cm.\" to \"m.\"",
-            default = True,
+            default = False,
             )
     bToSRGB : BoolProperty(
             name = "sRGB vertex color",
             description = "Apply 'linear RGB -> sRGB' conversion over vertex colors",
+            default = True,
+            )
+    bSmoothShade : BoolProperty(
+            name = "Smooth shading",
+            description = "Apply smooth shading after importing.",
             default = True,
             )
             
@@ -1911,6 +1918,7 @@ class ImportProps():
         layout.prop(props, 'bToSRGB')
         layout.prop(props, 'fBonesizeRatio')
         layout.prop(props, 'fBonesize')
+        layout.prop(props, 'bSmoothShade')
         
     def draw_psa(self, context):
         props = context.scene.pskpsa_import
@@ -2055,7 +2063,7 @@ class IMPORT_OT_psk(bpy.types.Operator, ImportProps):
             for _, fileListElement in enumerate(self.files):
                 fpath = self.directory + fileListElement.name
                 
-                no_errors = no_errors and pskimport( 
+                no_errors = no_errors and pskimport(
                             fpath,
                             context = context,
                             bImportmesh = bImportmesh, bImportbone = bImportbone,
@@ -2067,7 +2075,8 @@ class IMPORT_OT_psk(bpy.types.Operator, ImportProps):
                             bDontInvertRoot = props.bDontInvertRoot,
                             bScaleDown = props.bScaleDown,
                             bToSRGB = props.bToSRGB,
-                            error_callback = util_ui_show_msg
+                            bSmoothShade = props.bSmoothShade,
+                            error_callback = util_ui_show_msg,
                             )
 
         if not no_errors:
