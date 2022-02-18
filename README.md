@@ -5,11 +5,18 @@ You don't need to setup import options and rename objects.
 
 ### What's the difference with the original version?
 
-- Rename armature to "Armature"
-- Set false to Scale down as default
+- Rename armature to `Armature`
+- Set false to `Scale down` as default
 - Apply smooth shading
 
 <img src="https://user-images.githubusercontent.com/69258547/154747400-be4235c6-319a-4ecd-865c-87892ac6d7b1.jpg" width=269></img>
+
+### Why should we set false to Scale down?
+`Scale down` option will corrupt skeleton data.<br>
+You can't make mods with this option.<br>
+It will import the meshes as 100 times the size.<br>
+But it will be ok if you set the scale to 0.01 in export options.<br>
+<br>
 ## Original description
 <ul>
 <li>This is an heavily edited version of original blender plugin by Darknet / Optimus_P-Fat / Active_Trash / Sinsoft / flufy3d: https://en.blender.org/index.php/Extensions:2.6/Py/Scripts/Import-Export/Unreal_psk_psa (<a href="https://wiki.blender.org/index.php/Extensions:2.6/Py/Scripts/Import-Export/Unreal_psk_psa">old link</a>)
