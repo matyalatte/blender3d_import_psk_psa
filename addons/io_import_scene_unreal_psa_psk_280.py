@@ -67,6 +67,8 @@ Edited by matyalatte
 - Rename objects
 - Apply smooth shading
 - Set false to Down Scale as default
+- Change unit scale to 0.01
+- Combine psk skeleton and gltf mesh
 """
 
 # https://github.com/gildor2/UModel/blob/master/Exporters/Psk.h
@@ -2200,7 +2202,7 @@ class PSKPSA_PT_import_panel(bpy.types.Panel, ImportProps):
         self.draw_psa(context)
         
         
-#Convine psk and gltf
+#combine psk and gltf
 def get_mesh(armature):
     if armature.type!='ARMATURE':
         raise RuntimeError('Not an armature.')
@@ -2270,7 +2272,7 @@ def remove_vertices(mesh, vertex_group):
     bpy.ops.object.mode_set(mode='OBJECT', toggle=False)
     
         
-def convine_psk_and_gltf(psk_name, gltf_name):
+def combine_psk_and_gltf(psk_name, gltf_name):
     mode = bpy.context.object.mode
     bpy.ops.object.mode_set(mode='OBJECT')
     
@@ -2314,7 +2316,7 @@ def convine_psk_and_gltf(psk_name, gltf_name):
     
 
 class Run_Button(bpy.types.Operator):
-    bl_idname = "convine_psk_and_gltf.run_button"
+    bl_idname = "combine_psk_and_gltf.run_button"
     bl_label = "Run Button"
     bl_options = {'REGISTER', 'UNDO'}
     #--- properties ---#
@@ -2328,7 +2330,7 @@ class Run_Button(bpy.types.Operator):
             if gltf.type!='ARMATURE':
                 raise RuntimeError('Select gltf armature.')
             gltf_name=gltf.name
-            convine_psk_and_gltf(psk_name, gltf_name)
+            combine_psk_and_gltf(psk_name, gltf_name)
             self.report({'INFO'}, self.success)
         except Exception as e:
             self.report({'ERROR'}, e)
@@ -2339,16 +2341,17 @@ class Main_Panel(bpy.types.Panel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
     bl_category = "PSK / PSA"
-    bl_label = "Convine psk and gltf"
+    bl_label = "Combine psk and gltf"
 
     #--- draw ---#
     def draw(self, context):
         layout = self.layout
         layout.label(text='How to Use')
-        layout.label(text='1. Import psk and gltf.')
-        layout.label(text='2. Select gltf armature.')
-        layout.label(text='3. Click the button below.')        
-        layout.operator(Run_Button.bl_idname, text = "Convine psk and gltf")
+        layout.label(text='1. Import psk')
+        layout.label(text='2. Import gltf')
+        layout.label(text='3. Select gltf armature')
+        layout.label(text='4. Click the button below')        
+        layout.operator(Run_Button.bl_idname, text = "Combine psk and gltf")
 
 
     
