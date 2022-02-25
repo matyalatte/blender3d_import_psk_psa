@@ -9,11 +9,10 @@ You don't need to setup import options and rename objects.
 - Set false to `Scale down` as default
 - Apply smooth shading
 - Change unit scale to 0.01
-- Add UI panel to convine psk skeleton and gltf mesh
+- Add UI panel to combine psk skeleton and gltf mesh
 
 <img src="https://user-images.githubusercontent.com/69258547/154747400-be4235c6-319a-4ecd-865c-87892ac6d7b1.jpg" width=269></img>
-![convine_psk_gltf](https://user-images.githubusercontent.com/69258547/155711292-e17c63be-a176-4bd6-8c84-f33fec2ef983.png)
-
+![convine_psk_gltf](https://user-images.githubusercontent.com/69258547/155713407-ac41fcaf-786c-4300-a5a5-6514615a14b2.png)
 ### Why should we set false to Scale down?
 `Scale down` option will corrupt skeleton data.<br>
 You can't make mods with this option.<br>
