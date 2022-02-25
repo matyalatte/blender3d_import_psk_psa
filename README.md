@@ -9,10 +9,13 @@ You don't need to setup import options and rename objects.
 - Set false to `Scale down` as default
 - Apply smooth shading
 - Change unit scale to 0.01
-- Add UI panel to combine psk skeleton and gltf mesh
+- Add a UI panel to combine psk skeleton and gltf mesh
+- Add a UI panel to export an armature and its mesh as fbx
+- Split the script into some files
 
 <img src="https://user-images.githubusercontent.com/69258547/154747400-be4235c6-319a-4ecd-865c-87892ac6d7b1.jpg" width=269></img>
 ![convine_psk_gltf](https://user-images.githubusercontent.com/69258547/155713407-ac41fcaf-786c-4300-a5a5-6514615a14b2.png)
+![export_panel](https://user-images.githubusercontent.com/69258547/155806623-7fca602b-b24c-47c8-b67b-46bf8d79278f.png)
 ### Why should we set false to Scale down?
 `Scale down` option will corrupt skeleton data.<br>
 You can't make mods with this option.<br>
