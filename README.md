@@ -16,8 +16,6 @@ You don't need to setup import options and rename objects.
 ### Why should we set false to Scale down?
 `Scale down` option will corrupt skeleton data.<br>
 You can't make mods with this option.<br>
-It will import the meshes as 100 times the size.<br>
-But it will be ok if you set the scale to 0.01 in export options.<br>
 <br>
 ## Original description
 <ul>
