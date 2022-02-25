@@ -3,6 +3,15 @@ Blender3D Import psk psa addon (customized by matyalatte)
 I've customized the plugin for UE4 modding.<br>
 You don't need to setup import options and rename objects.
 
+### Installation
+
+1. Download the zip file from [the releases page](https://github.com/matyalatte/blender3d_import_psk_psa/releases).
+1. Open Blender.
+1. Open the "Preferences" window (Edit > Preferences).
+1. Select the "Add-ons" tab.
+1. Click "Install...".
+1. Select the zip file you downloaded and click "Install Add-on".
+
 ### What's the difference with the original version?
 
 - Rename armature to `Armature`
