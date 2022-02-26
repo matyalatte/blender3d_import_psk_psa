@@ -18,7 +18,17 @@ def export_as_fbx(file, armature, global_scale, smooth_type, export_tangent):
     
     mode = bpy.context.object.mode
     bpy.ops.object.mode_set(mode='OBJECT')
-    
+
+    armature_name = armature.name
+    try:
+        true_armature = bpy.data.objects['Armature']
+    except Exception as e:
+        true_armature = None
+
+    if true_armature is not None:
+        true_armature.name = 'foobarfoobarfoobar'
+    armature.name = 'Armature'
+        
     #deselect all
     for obj in bpy.context.scene.objects:
         obj.select_set(False)
@@ -50,6 +60,10 @@ def export_as_fbx(file, armature, global_scale, smooth_type, export_tangent):
         axis_up='Y'
         )
 
+    armature.name=armature_name
+    if true_armature is not None:
+        true_armature.name='Armature'
+
     bpy.ops.object.mode_set(mode=mode)
 
 
@@ -69,7 +83,8 @@ class Export_Inputs(bpy.types.PropertyGroup):
         description = 'Export smoothing information.',
         items = (('OFF', 'Normals Only','Export only normals'),
                 ('FACE','Face','Write face smoothing'),
-                ('EDGE','Edge','Write edge smoothing'))
+                ('EDGE','Edge','Write edge smoothing')),
+        default='FACE'
     )
 
 class Export_OT_Run_Button(bpy.types.Operator):
@@ -86,7 +101,6 @@ class Export_OT_Run_Button(bpy.types.Operator):
             if not bpy.data.is_saved:
                 raise RuntimeError('Save .blend first.')
             base_file_name=".".join(bpy.data.filepath.split('.')[:-1])
-            file = base_file_name + '.fbx'
 
             #get armature
             selected = bpy.context.selected_objects
@@ -95,7 +109,8 @@ class Export_OT_Run_Button(bpy.types.Operator):
             armature=selected[0]
             if armature.type!='ARMATURE':
                 raise RuntimeError('Select an armature.')
-            
+
+            file = base_file_name + '_' + armature.name +'.fbx'
             global_scale = context.scene.fbx_export_options.fGlobalScale
             smooth_type = context.scene.fbx_export_options.smooth_type
             export_tangent = context.scene.fbx_export_options.bExportTangent
@@ -120,7 +135,7 @@ class Export_PT_Panel(bpy.types.Panel):
         layout.label(text='How to Use')
         layout.label(text='1. Save .blend')
         layout.label(text='2. Select an armature')
-        layout.label(text='3. Click the button below') 
+        layout.label(text='3. Click the button below')
         layout.operator(Export_OT_Run_Button.bl_idname, icon='MESH_DATA')
         layout.label(text='Options')
         layout.prop(context.scene.fbx_export_options, 'fGlobalScale')
