@@ -12,6 +12,10 @@ You don't need to setup import options and rename objects.
 1. Click "Install...".
 1. Select the zip file you downloaded and click "Install Add-on".
 
+### Tutorial
+My version is different from the original version in usage.<br>
+Be sure to read [the tutorial](https://github.com/matyalatte/blender3d_import_psk_psa/wiki/Tutorial).<br>
+
 ### What's the difference with the original version?
 
 - Rename armature to `Armature`
