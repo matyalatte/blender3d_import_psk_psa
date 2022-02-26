@@ -7,10 +7,10 @@ You don't need to setup import options and rename objects.
 
 1. Download the zip file from [the releases page](https://github.com/matyalatte/blender3d_import_psk_psa/releases).
 1. Open Blender.
-1. Open the "Preferences" window (Edit > Preferences).
-1. Select the "Add-ons" tab.
-1. Click "Install...".
-1. Select the zip file you downloaded and click "Install Add-on".
+1. Open the `Preferences` window (Edit > Preferences).
+1. Select the `Add-ons` tab.
+1. Click `Install...`.
+1. Select the zip file you downloaded and click `Install Add-on`.
 
 ### Tutorial
 My version is different from the original version in usage.<br>
