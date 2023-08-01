@@ -2059,7 +2059,8 @@ class IMPORT_OT_psa(bpy.types.Operator, ImportProps):
                     "bToSRGB",
                     "filter_glob",
                     "files", 
-                    "directory"
+                    "directory",
+                    "bSmoothShade"
                     )
                 )) )
             return {'FINISHED'}
